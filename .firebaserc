@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "espada-para-o-ar": {
+      "hosting": {
+        "app-espada-para-o-ar": [
+          "espada-para-o-ar"
+        ]
+      }
+    }
+  }
+}

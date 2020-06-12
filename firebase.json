@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "app-espada-para-o-ar",
+      "public": "dist/app-espada-para-o-ar",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

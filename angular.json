@@ -123,6 +123,10 @@
               "devServerTarget": "app-espada-para-o-ar:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }

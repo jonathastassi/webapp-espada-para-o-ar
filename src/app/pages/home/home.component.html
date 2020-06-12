@@ -1,3 +1,59 @@
-<p>
-  home works!
-</p>
+<mat-card>
+  <img mat-card-image src="assets/images/bible/bible-first.jpg" alt="Espada para o ar" class="image-bible">
+  <mat-card-content>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            O que é?
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <p class="mat-body-2" style="margin-top: 16px;">
+          <strong>Espada para o ar</strong> é uma gincana bíblica com objetivo de ver quem encontra de forma mais rápida
+          um versículo na Bíblia. <br>
+          Pode ser jogado individualmente ou em grupos (Família, amigos ou na igreja). <br>
+          A proposta desse jogo neste site é a interação pessoal e disponibilizar os versículos de forma aleatória e
+          oferecer uma opção de placar, portanto não é um jogo online.
+        </p>
+
+      </mat-expansion-panel>
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Como jogar?
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <!-- <p class="mat-body-2"></p> -->
+        <mat-list role="list">
+          <p>Antes de iniciar o jogo, deve ser informado a quantidade de jogadores e seus
+            respectivos nomes.</p>
+          <p>Ao clicar em Começar, será sorteado um versículo bíblico.</p>
+          <p>A referência bíblica desse versículo, será exibido na seguinte ordem:
+            Versículo, Capítulo e Livro.</p>
+          <p>A rodada só tem início quando aparecer a frase "Espada para o ar" e o
+            cronômetro, assim os jogadores podem abrirem suas Bíblias e procurar.</p>
+          <p>Quando um dos jogadores encontrar a referência na Bíblia, deve clicar em
+            "Achei", ler o versículo e voz alta e todos devem conferir se é o mesmo versículo exibido na tela.
+          </p>
+          <p>Deve ser informado, quem foi o ganhador da rodada para receber a pontuação.</p>
+          <p>Nos critérios de pontuação, além de vencer, será avaliado a rapidez no manuseio da Bíblia também.</p>
+
+          <h3><strong>Bom jogo e Deus os abençoe!</strong></h3>
+
+
+        </mat-list>
+
+
+        <!-- <h3><strong>Divirta-se</strong></h3> -->
+
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <a routerLink="pre-game" mat-raised-button color="primary" class="button-large" style="flex: 1">INICIAR</a>
+  </mat-card-actions>
+</mat-card>

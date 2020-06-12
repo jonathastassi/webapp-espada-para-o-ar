@@ -1,4 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: #303030;
+}
+
+.button-large {
+  height: 52px !important;
+  line-height: 52px !important;
+}
+
+.mat-card-actions {
+  display: flex !important;
+}
+
+.msg-error {
+  background-color: #e35e6b;
+  color: #fff
+}

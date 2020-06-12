@@ -1,0 +1,12 @@
+.header-title {
+  display: flex;
+  justify-content: center;
+}
+
+.header-title>span {
+  padding: 0px 0.8rem;
+}
+
+.header-title>img {
+  width: 2rem;
+}

@@ -1,3 +1,36 @@
-<p>
-  pre-game works!
-</p>
+<mat-card>
+    <mat-card-content>
+        <form>
+            <mat-form-field appearance="legacy">
+                <mat-label>Quantidade de jogadores</mat-label>
+                <mat-select matInput (selectionChange)="changeQuantity($event)" [(value)]="quantitySelected">
+                    <mat-option value="">Selecione...</mat-option>
+                    <mat-option *ngFor="let item of [].constructor(50); let i = index" [value]="i + 1">{{ i + 1 }} -
+                        {{ i + 1 == 1 ? 'jogador' : 'jogadores' }}
+                    </mat-option>
+                </mat-select>
+                <mat-hint *ngIf="quantitySelected == 0">Selecione pelo menos 1 jogador</mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="legacy" *ngFor="let player of players; let i = index">
+                <input matInput [placeholder]="'Jogador ' + (i+1) " [name]="'name_' + (i+1)" [(ngModel)]="player.name">
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+    <mat-card-actions style="display: flex;">
+        <a style="flex: 1" routerLink="/" mat-raised-button color="primary" class="button-large">VOLTAR</a>
+        <button style="flex: 1; margin-right: 0;" (click)="startGame()" mat-raised-button color="primary"
+            class="button-large">COMEÇAR</button>
+    </mat-card-actions>
+    <mat-card-actions *ngIf="(storeGame$ | async).quantityPlayers > 0" style="display: flex; padding-bottom: 25px;">
+        <button (click)="setPlayers()" mat-button style="flex: 1;">Usar jogadores do último
+            jogo</button>
+    </mat-card-actions>
+</mat-card>
+
+<ng-template #modalLoading>
+    <h2 style="text-align: center; margin: 20px 0px;" mat-dialog-title>Aguarde! O jogo está sendo carregado...</h2>
+    <div class="spinner-section">
+        <mat-progress-spinner color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+    </div>
+</ng-template>

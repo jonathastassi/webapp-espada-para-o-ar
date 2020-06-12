@@ -1,3 +1,112 @@
-<p>
-  game works!
-</p>
+<mat-card *ngIf="biblicalReference && (storeGame$ | async).quantityPlayers > 0">
+    <mat-card-content style="text-align: center;">
+
+        <div class="painel-visor mat-elevation-z6">
+            <div *ngIf="!gameScreen.showGo">
+                <span class="mat-headline" *ngIf="gameScreen.showFirstTitle">
+                    {{ (storeGame$ | async).quantityPlayers == 1 ? 'Abra a sua Bíblia em ...' : 'Abram as suas Bíblias em ...' }}
+                </span>
+
+                <h1 *ngIf="gameScreen.showVerse" class="reference"><small class="mat-body-2">versículo</small>
+                    {{ biblicalReference.verse }}
+                </h1>
+                <h1 *ngIf="gameScreen.showChapter" class="reference"><small class="mat-body-2">capítulo</small>
+                    {{ biblicalReference.chapter }}</h1>
+                <h1 *ngIf="gameScreen.showBook" class="reference"><small class="mat-body-2">livro</small>
+                    {{ biblicalReference.book }}
+                </h1>
+
+                <span class="mat-headline" *ngIf="gameScreen.showPrepare">
+                    {{ (storeGame$ | async).quantityPlayers == 1 ? 'Prepare-se ...' : 'Preparem-se ...' }}
+                </span>
+            </div>
+
+            <div *ngIf="gameScreen.showGo">
+
+                <h2 class="reference" style="margin-top: 16px;">{{ biblicalReference.book }} -
+                    <strong>{{ biblicalReference.chapter }} : {{ biblicalReference.verse }}</strong> </h2>
+
+                <h1 class="reference" style="margin-top: 16px;">Espada para o ar</h1>
+
+                <app-chronometer #timer></app-chronometer>
+            </div>
+
+        </div>
+
+        <mat-accordion>
+            <mat-expansion-panel [disabled]="!gameScreen.showGo">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Ver o versículo
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <p class="mat-body-2" style="margin-top: 16px;">{{ biblicalReference.text }}</p>
+                <p class="mat-body-1" style="margin-top: 16px;">{{ biblicalReference.book }},
+                    {{ biblicalReference.chapter }}:{{ biblicalReference.verse }}</p>
+
+
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-card-content>
+    <mat-card-actions style="display: flex;">
+        <button [disabled]="!gameScreen.showGo" style="flex: 1; margin-right: 0;" (click)="verifyReference()"
+            mat-raised-button color="primary" class="button-large">ACHEI</button>
+    </mat-card-actions>
+</mat-card>
+
+
+
+<ng-template #panelVerifyReference>
+    <h1 style="text-align: center; margin: 20px 0px;" mat-dialog-title>Versículo está correto?</h1>
+    <div mat-dialog-content>
+        <p class="mat-body-1" style="margin-top: 16px;text-align: center;">{{ biblicalReference.text }}</p>
+        <p class="mat-body-1" style="margin: 16px;text-align: center;"><strong>{{ biblicalReference.book }} -
+                {{ biblicalReference.chapter }} : {{ biblicalReference.verse }}</strong></p>
+    </div>
+    <div mat-dialog-actions style="display: flex; margin-bottom: 10px;">
+        <button style="flex: 1; margin-right: 4px;" (click)="openModalRestart()" class="button-large" mat-raised-button
+            color="primary">Não</button>
+        <button style="flex: 1; margin-left: 4px;" (click)="openDialogSetWin()" class="button-large" mat-raised-button
+            color="primary">Sim</button>
+    </div>
+</ng-template>
+
+<ng-template #modalWinner>
+    <h1 style="text-align: center; margin: 20px 0px;" mat-dialog-title>Selecione o vencedor</h1>
+    <h3 style="text-align: center;">Pontos conquistados: {{ points }}</h3>
+
+    <div mat-dialog-content>
+        <mat-selection-list #shoes [multiple]="false" *ngIf="!selectedPlayerWinner">
+            <mat-list-option (click)="selectWinner(gamePlayer)"
+                *ngFor="let gamePlayer of (storeGame$ | async).game.gamePlayers" style="text-align: center;">
+                {{gamePlayer.player.name}}
+            </mat-list-option>
+        </mat-selection-list>
+    </div>
+
+    <div mat-dialog-actions style="display: flex; flex-direction: column; margin-bottom: -12px; margin-top: 25px;">
+        <button [disabled]="!selectedPlayerWinner" style="flex: 1; margin-bottom: 6px; width: 100%;"
+            class="button-large" mat-raised-button color="primary" (click)="dialog.closeAll(); startGame()">Próxima
+            rodada</button>
+        <button (click)="finalizeGame()" [disabled]="!selectedPlayerWinner"
+            style="flex: 1; margin-bottom: 6px; width: 100%; margin-left: 0px;" class="button-large" mat-raised-button
+            color="primary">Finalizar o
+            jogo</button>
+    </div>
+</ng-template>
+
+
+
+<ng-template #modalRestart>
+    <h1 style="text-align: center; margin: 20px 0px;" mat-dialog-title>Deseja jogar mais uma rodada?</h1>
+    <div mat-dialog-actions style="display: flex; flex-direction: column; margin-bottom: -12px; margin-top: 25px;">
+        <button style="flex: 1; margin-bottom: 6px; width: 100%;" class="button-large" mat-raised-button color="primary"
+            (click)="dialog.closeAll(); startGame()">Sim, próxima
+            rodada</button>
+        <button (click)="finalizeGame()" style="flex: 1; margin-bottom: 6px; width: 100%; margin-left: 0px;"
+            class="button-large" mat-raised-button color="primary">Não, finalizar
+            o
+            jogo</button>
+    </div>
+</ng-template>

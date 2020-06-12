@@ -1,0 +1,25 @@
+.painel-visor {
+  width: calc(100% - 32px);
+  /* min-height: 18rem; */
+  background-color: #290a36;
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.painel-visor span {
+  font-weight: 400;
+  font-variant: all-small-caps;
+}
+
+.painel-visor h1.reference {
+  font-variant: all-small-caps;
+  font-size: 33px;
+  color: yellow;
+  font-weight: bolder;
+}
+
+.painel-visor h1.reference>small {
+  color: white;
+  font-variant: all-small-caps;
+}
